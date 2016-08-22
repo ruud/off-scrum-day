@@ -1,15 +1,18 @@
 <!doctype html>
 
 <html>
-  <head>
-    <title>off-scrum-day</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
-    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="/src/off-scrum-day-app/off-scrum-day-app.html">
-  </head>
-  <body>
-    <off-scrum-day-app></off-scrum-day-app>
-  </body>
+    <head>
+        <title>off-scrum-day</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="manifest" href="/manifest.json">
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+        <link rel="import" href="/src/off-scrum-day-app/off-scrum-day-app.html">
+        <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+    </head>
+    <body>
+        <!-- Configure Firebase app: -->
+        <firebase-app name="offscrumday" api-key="AIzaSyDuSYkoRrFL20TnWsAIG2Q2DgzNt7eW00A" storage-bucket="off-scrum-day.appspot.com" auth-domain="off-scrum-day.firebaseapp.com" database-url="https://off-scrum-day.firebaseio.com"></firebase-app>
+        <off-scrum-day-app></off-scrum-day-app>
+    </body>
 </html>

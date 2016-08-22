@@ -1,27 +1,34 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
 <dom-module id="off-scrum-day-app">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]</h2>
-  </template>
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
 
-  <script>
-    Polymer({
+        </style>
+        <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
+        <h2>Hello [[prop1]]</h2>
+        <ul class="notes">
+            <template is="dom-repeat" items="[[data]]" as="transaction">
+                <li>{{transaction.title}}</li>
+            </template>
+        </ul>
 
-      is: 'off-scrum-day-app',
+    </template>
 
-      properties: {
-        prop1: {
-          type: String,
-          value: 'off-scrum-day-app',
-        },
-      },
+    <script>
+        Polymer({
 
-    });
-  </script>
+            is: 'off-scrum-day-app',
+
+            properties: {
+                prop1: {
+                    type: String,
+                    value: 'off-scrum-day-app'
+                }
+            }
+        });
+    </script>
 </dom-module>
