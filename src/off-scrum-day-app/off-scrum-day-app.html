@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <dom-module id="off-scrum-day-app">
     <template>
         <style>
@@ -8,10 +9,13 @@
             }
 
         </style>
+
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
+        <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}" persisted-data="{{persistedData}}"></app-indexeddb-mirror>
+
         <h2>Hello [[prop1]]</h2>
         <ul class="notes">
-            <template is="dom-repeat" items="[[data]]" as="transaction">
+            <template is="dom-repeat" items="[[persistedData]]" as="transaction">
                 <li>{{transaction.title}}</li>
             </template>
         </ul>
