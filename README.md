@@ -1,7 +1,5 @@
 # \<off-scrum-day\>
 
-
-
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
@@ -36,3 +34,8 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+## What to help?
+
+Join https://waffle.io/ruud/off-scrum-day on waffle
+and come to the Gitter lobby on https://gitter.im/off-scrum-day/Lobby 
