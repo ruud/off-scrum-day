@@ -37,5 +37,5 @@ Your application is already set up to be tested via [web-component-tester](https
 
 ## What to help?
 
-Join https://waffle.io/ruud/off-scrum-day on waffle
-and come to the Gitter lobby on https://gitter.im/off-scrum-day/Lobby 
+Join [off-scrum-day](https://waffle.io/ruud/off-scrum-day) on Waffle
+and come to the Gitter lobby on [off-scrum-day](https://gitter.im/off-scrum-day/Lobby).
