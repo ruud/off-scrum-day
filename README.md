@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/ruud/off-scrum-day.png?label=ready&title=Ready)](https://waffle.io/ruud/off-scrum-day)
 # \<off-scrum-day\>
 
 ## Install the Polymer-CLI
