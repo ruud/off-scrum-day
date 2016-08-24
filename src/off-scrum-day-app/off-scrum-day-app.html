@@ -115,9 +115,34 @@
                 // set data to the value to set/push
                 this.$.mydoc.data = {
                     related_account: '3022977',
-                    type: 'GT',
-                    name: 'Fugazi',
-                    description: 'cashorder 12345',
+                    type: this._getRandomStringFromArray([
+                        'GT',
+                        'BA',
+                        'VZ'
+                    ]),
+                    name: this._getRandomStringFromArray([
+                        'Stichting Aap',
+                        'Eneco Energie',
+                        'McDonalds Nederland BV',
+                        'ML Dienstverlening',
+                        'Dhr. D. Wijnand',
+                        'Dhr. R. van. Battum',
+                        'Dhr. P. Verkaart',
+                        'Dhr. R. Prein',
+                        'Dhr. A. Janssen',
+                        'Dhr. D. Moerkerke',
+                        'Dhr. E. de Vries'
+                    ]),
+                    description: this._getRandomStringFromArray([
+                        'cashorder 12345',
+                        'energie juli 2016',
+                        'Salarisbetaling juli MacDonalds',
+                        'Factuur grondwerk',
+                        'Bedankt voor het lenen',
+                        'Pasvolgnr:008 22-08-2016 07:35',
+                        'Pasvolgnr:008 22-08-2016 12:35',
+                        'Pasvolgnr:008 21-08-2016 14:35'
+                    ]),
                     amount: String(Math.floor(Math.random() * 20001) - 10000),
                     date: new Date(),
                     iconId: String(this._getRandomInt(1,5))
@@ -129,6 +154,11 @@
 
             _getRandomInt: function(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            _getRandomStringFromArray: function(textArray) {
+                var randomNumber = Math.floor(Math.random()*textArray.length);
+                return textArray[randomNumber];
             },
 
             _dataChanged: function (newData, oldData) {
