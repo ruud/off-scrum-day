@@ -81,7 +81,7 @@
 
         <off-scrum-day-balance transactions="[[persistedData]]"></off-scrum-day-balance>
 
-        <template is="dom-repeat" items="[[persistedData]]" as="transaction">
+        <template is="dom-repeat" items="[[persistedData]]" as="transaction" sort="_computeSort">
 
                     <paper-item>
 
@@ -153,7 +153,7 @@
                         'Pasvolgnr:008 21-08-2016 14:35'
                     ]),
                     amount: String(Math.floor(Math.random() * 20001) - 10000),
-                    date: new Date().toString(),
+                    date: new Date().getTime(),
                     iconId: String(this._getRandomInt(1,5))
                 };
 
@@ -206,6 +206,13 @@
                     case '5': return "transfer";
                     default: return '';
                 }
+            },
+
+            _computeSort: function(a, b) {
+              if (a.date == b.date) {
+                return 0;
+              }
+              return a.date > b.date ? -1 : 1;
             }
 
         });
