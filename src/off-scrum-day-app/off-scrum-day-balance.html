@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+
 <dom-module id="off-scrum-day-balance">
     <template>
         <style>
@@ -7,7 +9,8 @@
             }
 
         </style>
-        <h2>BALANCE: &euro;[[getBalance(transactions)]]</h2>
+
+        <h2>BALANCE: &euro;[[getBalance(transactions, transactions.length)]] op basis van [[transactions.length]] transacties</h2>
 
     </template>
 
@@ -17,15 +20,23 @@
             is: 'off-scrum-day-balance',
 
             properties: {
+                balance: {
+                    type: String
+                },
                 transactions: {
                     type: Array
                 }
             },
-            getBalance : function(transactions) {
-//                    var initialBalance = 0;
-                return transactions.reduce(function (a, b) {
-                    return {amount: a.amount + b.amount}
-                }, {amount: 0}).amount;
+
+            getBalance: function (transactions) {
+                if(transactions && transactions.length > 0){
+
+                    return transactions.reduce(function (previousValue, transaction) {
+                        return previousValue + Number(transaction.amount);
+                    }, 0);
+
+                }
+
             }
         });
     </script>

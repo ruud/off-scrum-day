@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <link rel="import" href="off-scrum-day-balance.html">
 <dom-module id="off-scrum-day-app">
@@ -7,23 +8,32 @@
         <style>
             :host {
                 display: block;
+
+            }
+            paper-toolbar.ing {
+                --paper-toolbar-background: #FF6200;
             }
 
-        </style>
 
+        </style>
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
         <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}" persisted-data="{{persistedData}}"></app-indexeddb-mirror>
 
-        <h2>Hello [[prop1]]</h2>
-        <button id="credit">+</button><br>
-        <button id="debit">-</button><br>
+        <paper-toolbar class="ing" >
+            <div class="title">ING</div>
+        </paper-toolbar>
 
-        <off-scrum-day-balance transactions="[[transactions]]"></off-scrum-day-balance>
-        <ul class="notes">
-            <template is="dom-repeat" items="[[transactions]]" as="transaction">
-                <li>{{transaction.title}} {{transaction.amount}}</li>
+        <h2>Hello [[prop1]]</h2>
+
+        <off-scrum-day-balance transactions="[[persistedData]]"></off-scrum-day-balance>
+
+            <ul class="notes">
+            <template is="dom-repeat" items="[[persistedData]]" as="transaction">
+                <li>{{transaction.description}} {{transaction.amount}}</li>
             </template>
         </ul>
+
+        <button on-tap="mimicTransaction">Mimic transaction</button>
 
     </template>
 
@@ -31,32 +41,27 @@
         Polymer({
 
             is: 'off-scrum-day-app',
-            listeners: {
-                'credit.tap': '_addCreditTransaction',
-                'debit.tap': '_addDebitTransaction'
-            },
             properties: {
                 prop1: {
                     type: String,
                     value: 'off-scrum-day-app'
-                },
-                transactions : {
-                    type : Array,
-                    value : function(){
-                        return [{title:"1", amount : 1000}, {title:"2", amount : 2000}, {title:"3", amount : -500}];
-                    }
                 }
             },
-            _addCreditTransaction : function() {
-                var newTransactions = JSON.parse(JSON.stringify(this.transactions));
-                newTransactions.push({title: this.transactions.length+1, amount : (this.transactions.length+1)*100});
-                this.set('transactions', newTransactions);
-            },
-            _addDebitTransaction : function() {
-                var newTransactions = JSON.parse(JSON.stringify(this.transactions));
-                newTransactions.push({title: this.transactions.length+1, amount : -(this.transactions.length+1)*100});
-                this.set('transactions', newTransactions);
+
+            mimicTransaction: function() {
+                var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
+                this.unshift('persistedData', {
+                    $key: key,
+                    related_account: '3022977',
+                    type: 'GT',
+                    name: 'Fugazi',
+                    description: 'cashorder 12345',
+                    amount: -25,
+                    date: new Date(),
+                    iconId: 1
+                });
             }
+
         });
     </script>
 </dom-module>
