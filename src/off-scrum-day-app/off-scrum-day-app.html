@@ -118,14 +118,17 @@
                     type: 'GT',
                     name: 'Fugazi',
                     description: 'cashorder 12345',
-                    amount: -25,
+                    amount: String(Math.floor(Math.random() * 20001) - 10000),
                     date: new Date(),
-                    iconId: 1
-
+                    iconId: String(this._getRandomInt(1,5))
                 };
 
                 // call save, if the second parameter is falsey it'll call push to the first parameter if it's truthy it'll set the data to firstparam/secondparam
                 this.$.mydoc.save('/offscrumday');
+            },
+
+            _getRandomInt: function(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
             },
 
             _dataChanged: function (newData, oldData) {
