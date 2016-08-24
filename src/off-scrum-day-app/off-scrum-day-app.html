@@ -2,6 +2,8 @@
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
 <dom-module id="off-scrum-day-app">
     <template>
         <style>
@@ -12,8 +14,9 @@
             paper-toolbar.ing {
                 --paper-toolbar-background: #FF6200;
             }
-
-
+            .ing {
+                display: inline-flex;
+            }
         </style>
 
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
@@ -26,7 +29,15 @@
         <h2>Hello [[prop1]]</h2>
         <ul class="notes">
             <template is="dom-repeat" items="[[persistedData]]" as="transaction">
-                <li>{{transaction.description}}</li>
+                <paper-item>
+                    <paper-item-body two-line>
+                        <div class="ing">{{transaction.type}}</div>
+                        <div class="ing">{{transaction.date}}</div>
+                        <div class="ing">{{transaction.name}}</div>
+                        <div class="ing">{{transaction.amount}}</div>
+                        <div secondary>{{transaction.description}}</div>
+                    </paper-item-body>
+                </paper-item>
             </template>
         </ul>
 
