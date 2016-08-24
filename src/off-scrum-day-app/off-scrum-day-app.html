@@ -20,12 +20,13 @@
             }
 
             .unviewed {
-                font-style:italic;
+                font-style: italic;
                 font-weight: bold;
             }
+
             .viewed {
-                font-style:normal;
-                font-weight:normal;
+                font-style: normal;
+                font-weight: normal;
             }
 
             .ing {
@@ -42,6 +43,7 @@
                 margin: 10px;
                 padding: 5px;
             }
+
             .seperateline {
                 display: inline-flex;
                 margin: 3px;
@@ -53,26 +55,25 @@
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
         <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}"
                               persisted-data="{{persistedData}}"></app-indexeddb-mirror>
-
         <paper-toolbar class="ingtoolbar">
             <div class="title">ING</div>
         </paper-toolbar>
-
-        <h2>Hello [[prop1]]</h2>
         <ul class="notes">
             <template is="dom-repeat" items="[[persistedData]]" as="transaction">
-                <paper-item>
-                    <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
-                        <paper-icon-item>
-                            <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
-                        </paper-icon-item>
-                        <div class="ing">{{transaction.type}}</div>
-                        <div class="ing">{{transaction.date}}</div>
-                        <div class="ing">{{transaction.name}}</div>
-                        <div class="ing">{{transaction.amount}}</div>
-                        <div secondary>{{transaction.description}}</div>
-                    </paper-item-body>
-                </paper-item>
+                <div class="itembox">
+                    <paper-item>
+                        <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
+                            <paper-icon-item>
+                                <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
+                            </paper-icon-item>
+                            <div class="ing">{{transaction.type}}</div>
+                            <div class="ing">{{transaction.date}}</div>
+                            <div class="ing">{{transaction.name}}</div>
+                            <div class="ing">{{transaction.amount}}</div>
+                            <div secondary>{{transaction.description}}</div>
+                        </paper-item-body>
+                    </paper-item>
+                </div>
             </template>
         </ul>
 
@@ -96,38 +97,42 @@
                 }
             },
 
-            mimicTransaction: function() {
-              var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
-              this.unshift('persistedData', {
-                $key: key,
-                title: 'Fugazi'
-              });
+            mimicTransaction: function () {
+                var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
+                this.unshift('persistedData', {
+                    $key: key,
+                    title: 'Fugazi'
+                });
             },
 
-            _dataChanged: function(newData, oldData) {
+            _dataChanged: function (newData, oldData) {
                 if (typeof oldData !== "undefined" && newData !== oldData) {
                     console.log("data changed");
                     console.log(this.persistedData);
                 }
             },
 
-            conditionalClassViewed: function(viewed){
+            conditionalClassViewed: function (viewed) {
                 console.log(viewed);
                 if ((viewed === 'true')) {
                     return 'viewed';
-                }else{
+                } else {
                     return 'unviewed';
                 }
             },
 
-            _getIconId: function(transaction) {
+            _getIconId: function (transaction) {
                 console.log('TEST', transaction);
                 switch (transaction.iconId) {
-                    case '1': return 'pin';
-                    case '2': return "cheque";
-                    case '3': return "giro";
+                    case '1':
+                        return 'pin';
+                    case '2':
+                        return "cheque";
+                    case '3':
+                        return "giro";
 
-                    default: return "";
+                    default:
+                        return "";
                 }
             }
         });
