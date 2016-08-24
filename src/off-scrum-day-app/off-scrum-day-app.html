@@ -70,7 +70,7 @@
             }
 
         </style>
-        <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
+        <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}" order-by-child="date"></firebase-query>
         <firebase-document id="mydoc" app-name="offscrumday"></firebase-document>
         <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}"
                               persisted-data="{{persistedData}}"></app-indexeddb-mirror>
