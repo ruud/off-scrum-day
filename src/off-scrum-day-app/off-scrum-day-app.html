@@ -64,6 +64,7 @@
                               persisted-data="{{persistedData}}"></app-indexeddb-mirror>
         <paper-toolbar class="ingtoolbar">
             <div class="title">ING</div>
+            <paper-fab icon="add" on-tap="mimicTransaction">Mimic transaction</paper-fab>
         </paper-toolbar>
 
             <template is="dom-repeat" items="[[persistedData]]" as="transaction">
@@ -80,9 +81,6 @@
                     </paper-item>
 
             </template>
-
-
-        <paper-fab icon="add" on-tap="mimicTransaction">Mimic transaction</paper-fab>
 
     </template>
 
