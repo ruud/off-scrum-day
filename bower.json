@@ -9,7 +9,8 @@
     "iron-icon": "PolymerElements/iron-icon",
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg",
     "iron-icons": "PolymerElements/iron-icons",
-    "paper-checkbox": "PolymerElements/paper-checkbox#^1.4.0"
+    "paper-checkbox": "PolymerElements/paper-checkbox#^1.4.0",
+    "neon-animation": "PolymerElements/neon-animation#1.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

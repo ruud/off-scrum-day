@@ -8,13 +8,15 @@
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../tgc-ing-transaction-icons.html">
 <link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+
+
 
 <dom-module id="off-scrum-day-app">
     <template>
         <style>
             :host {
                 display: block;
-
             }
 
             iron-icon {
@@ -45,7 +47,6 @@
                 position: absolute;
                 right: 10px;
                 top:10px;
-
             }
 
             paper-item {
@@ -56,7 +57,6 @@
             .seperateline {
                 display: inline-flex;
                 margin: 3px;
-
             }
 
         </style>
@@ -70,10 +70,8 @@
             <paper-fab icon="add" on-tap="_addTransaction">Mimic transaction</paper-fab>
         </paper-toolbar>
 
-            <template is="dom-repeat" items="[[persistedData]]" as="transaction">
-
-                    <paper-item>
-
+            <template id="list" is="dom-repeat" items="[[persistedData]]" as="transaction">
+                    <paper-item onload="{{_conditionalClassFly(transaction.viewed, transaction)}}">
                         <paper-checkbox id="checkbox" checked="{{_isViewed(transaction.viewed)}}"></paper-checkbox>
                         <paper-icon-item>
                             <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
@@ -84,7 +82,6 @@
                             <div secondary>{{transaction.description}}</div>
                         </paper-item-body>
                     </paper-item>
-
             </template>
 
     </template>
@@ -102,9 +99,25 @@
                 persistedData: {
                     type: Array,
                     observer: '_dataChanged'
+                },
+                animationConfig: {
+                    value: function () {
+                        return {
+                            'entry': [
+                                {
+                                    // provided by neon-animation/animations/transform-animation.html
+                                    name: 'transform-animation',
+                                    transformFrom: 'translateX(-200vh)',
+                                    node: this,
+                                    timing: {duration: 600}
+                                }]
+                        }
+                    }
                 }
             },
-
+            behaviors: [
+                Polymer.NeonAnimationRunnerBehavior
+            ],
             _addTransaction: function () {
                 // https://github.com/firebase/polymerfire/issues/15
                 // http://stackoverflow.com/questions/37711115/polymerfire-creating-data-after-an-event
@@ -153,6 +166,18 @@
                     case '4': return "atm";
                     case '5': return "transfer";
                     default: return '';
+                }
+            },
+            _conditionalClassFly: function (viewed, transaction) {
+
+                if ((viewed === 'false')) {
+                    console.log("test");
+                    console.log(this.$.list.modelForElement(transaction));
+
+//                    transaction.$key.playAnimation('entry');
+                }
+                else {
+                    return
                 }
             }
         });
