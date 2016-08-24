@@ -1,9 +1,11 @@
 [![Stories in Ready](https://badge.waffle.io/ruud/off-scrum-day.png?label=ready&title=Ready)](https://waffle.io/ruud/off-scrum-day)
 # \<off-scrum-day\>
 
-## Install the Polymer-CLI
+## Install the dependencies
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
+```
+$ npm install
+```
 
 ## Viewing Your Application
 
@@ -39,4 +41,4 @@ Your application is already set up to be tested via [web-component-tester](https
 ## What to help?
 
 Join [off-scrum-day](https://waffle.io/ruud/off-scrum-day/join) on Waffle
-and come to the Gitter [off-scrum-day](https://gitter.im/off-scrum-day/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) community. 
+and come to the Gitter [off-scrum-day](https://gitter.im/off-scrum-day/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) community.
