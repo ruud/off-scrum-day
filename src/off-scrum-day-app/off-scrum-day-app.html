@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="off-scrum-day-balance.html">
 <dom-module id="off-scrum-day-app">
     <template>
         <style>
@@ -14,9 +15,13 @@
         <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}" persisted-data="{{persistedData}}"></app-indexeddb-mirror>
 
         <h2>Hello [[prop1]]</h2>
+        <button id="credit">+</button><br>
+        <button id="debit">-</button><br>
+
+        <off-scrum-day-balance transactions="[[transactions]]"></off-scrum-day-balance>
         <ul class="notes">
-            <template is="dom-repeat" items="[[persistedData]]" as="transaction">
-                <li>{{transaction.title}}</li>
+            <template is="dom-repeat" items="[[transactions]]" as="transaction">
+                <li>{{transaction.title}} {{transaction.amount}}</li>
             </template>
         </ul>
 
@@ -26,12 +31,31 @@
         Polymer({
 
             is: 'off-scrum-day-app',
-
+            listeners: {
+                'credit.tap': '_addCreditTransaction',
+                'debit.tap': '_addDebitTransaction'
+            },
             properties: {
                 prop1: {
                     type: String,
                     value: 'off-scrum-day-app'
+                },
+                transactions : {
+                    type : Array,
+                    value : function(){
+                        return [{title:"1", amount : 1000}, {title:"2", amount : 2000}, {title:"3", amount : -500}];
+                    }
                 }
+            },
+            _addCreditTransaction : function() {
+                var newTransactions = JSON.parse(JSON.stringify(this.transactions));
+                newTransactions.push({title: this.transactions.length+1, amount : (this.transactions.length+1)*100});
+                this.set('transactions', newTransactions);
+            },
+            _addDebitTransaction : function() {
+                var newTransactions = JSON.parse(JSON.stringify(this.transactions));
+                newTransactions.push({title: this.transactions.length+1, amount : -(this.transactions.length+1)*100});
+                this.set('transactions', newTransactions);
             }
         });
     </script>

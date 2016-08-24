@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="off-scrum-day-balance">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+        </style>
+        <h2>BALANCE: &euro;[[getBalance(transactions)]]</h2>
+
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'off-scrum-day-balance',
+
+            properties: {
+                transactions: {
+                    type: Array
+                }
+            },
+            getBalance : function(transactions) {
+//                    var initialBalance = 0;
+                return transactions.reduce(function (a, b) {
+                    return {amount: a.amount + b.amount}
+                }, {amount: 0}).amount;
+            }
+        });
+    </script>
+</dom-module>
