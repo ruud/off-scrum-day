@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
@@ -61,6 +62,7 @@
         </style>
 
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
+        <firebase-document id="mydoc" app-name="offscrumday"></firebase-document>
         <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}"
                               persisted-data="{{persistedData}}"></app-indexeddb-mirror>
         <paper-toolbar class="ingtoolbar">
@@ -117,6 +119,17 @@
               });
             },
 
+            _addTransaction: function () {
+                //set path to null somewhere to avoid overwriting data, I recommend doing it here since save's path update is lazy
+                this.$.mydoc.path = null;
+
+                //set data to the value to set/push
+                this.$.mydoc.data = {name: 'New transaction'};
+
+                //call save, if the second parameter is falsey it'll call push to the first parameter if it's truthy it'll set the data to firstparam/secondparam
+                this.$.mydoc.save('/offscrumday');
+            },
+
             _dataChanged: function (newData, oldData) {
                 if (typeof oldData !== "undefined" && newData !== oldData) {
                     console.log("data changed");
@@ -137,7 +150,6 @@
             },
 
             _getIconId: function (transaction) {
-                console.log('TEST', transaction);
                 switch (transaction.iconId) {
                     case '1': return 'pin';
                     case '2': return "cheque";
