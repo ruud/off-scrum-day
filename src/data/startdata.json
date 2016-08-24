@@ -4,8 +4,8 @@
         "type": "GT",
         "name": "Stichting Aap",
         "description": "cashorder 12345",
-        "amount": "-25",
-        "date": "24-08-2016",
+        "amount": -25,
+        "date": 1472045972812,
         "iconId": "1",
         "viewed": "false"
     }, {
@@ -13,8 +13,8 @@
         "type": "GT",
         "name": "Eneco Energie",
         "description": "energie juli 2016",
-        "amount": "-185",
-        "date": "23-08-2016",
+        "amount": -185,
+        "date": 1472045964932,
         "iconId": "2",
         "viewed": "false"
     }, {
@@ -22,8 +22,8 @@
         "type": "VZ",
         "name": "McDonalds Nederland BV",
         "description": "Salarisbetaling juli MacDonalds",
-        "amount": "2500",
-        "date": "23-08-2016",
+        "amount": 2500,
+        "date": 1472045945624,
         "iconId": "4",
       "viewed": "true"
     }, {
@@ -31,8 +31,8 @@
         "type": "GT",
         "name": "ML Dienstverlening",
         "description": "Factuur grondwerk",
-        "amount": "-300",
-        "date": "22-08-2016",
+        "amount": -300,
+        "date": 1472045945624,
         "iconId": "4",
         "viewed": "true"
     }, {
@@ -40,8 +40,8 @@
         "type": "GT",
         "name": "Mevrouw de Vries",
         "description": "Bedankt voor het lenen",
-        "amount": "34",
-        "date": "22-08-2016",
+        "amount": 34,
+        "date": 1472045945624,
         "iconId": "5",
         "viewed": "true"
     }, {
@@ -49,8 +49,8 @@
         "type": "BA",
         "name": "AH Amersfoort AMERSFOORT NL",
         "description": "Pasvolgnr:008 22-08-2016 07:35",
-        "amount": "-3.75",
-        "date": "22-08-2016",
+        "amount": -3.75,
+        "date": 1472045945624,
         "iconId": "5",
         "viewed": "true"
     }, {
@@ -58,8 +58,8 @@
         "type": "BA",
         "name": "Sodexo NL Amsterdam",
         "description": "Pasvolgnr:008 22-08-2016 12:35",
-        "amount": "-11.53",
-        "date": "22-08-2016",
+        "amount": -11.53,
+        "date": 1472045936164,
         "iconId": "3",
         "viewed": "true"
     }, {
@@ -67,8 +67,8 @@
         "type": "BA",
         "name": "Gamma Nederland",
         "description": "Pasvolgnr:008 21-08-2016 14:35",
-        "amount": "-31.56",
-        "date": "21-08-2016",
+        "amount": -31.56,
+        "date": 1472045889094,
         "iconId": "1",
         "viewed": "true"
     }]
