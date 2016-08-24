@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../tgc-ing-transaction-icons.html">
 
 <dom-module id="off-scrum-day-app">
     <template>
@@ -62,6 +63,9 @@
             <template is="dom-repeat" items="[[persistedData]]" as="transaction">
                 <paper-item>
                     <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
+                        <paper-icon-item>
+                            <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
+                        </paper-icon-item>
                         <div class="ing">{{transaction.type}}</div>
                         <div class="ing">{{transaction.date}}</div>
                         <div class="ing">{{transaction.name}}</div>
@@ -113,6 +117,17 @@
                     return 'viewed';
                 }else{
                     return 'unviewed';
+                }
+            },
+
+            _getIconId: function(transaction) {
+                console.log('TEST', transaction);
+                switch (transaction.iconId) {
+                    case '1': return 'pin';
+                    case '2': return "cheque";
+                    case '3': return "giro";
+
+                    default: return "";
                 }
             }
         });
