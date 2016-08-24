@@ -1,8 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <link rel="import" href="off-scrum-day-balance.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../tgc-ing-transaction-icons.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+
 <dom-module id="off-scrum-day-app">
     <template>
         <style>
@@ -10,30 +17,77 @@
                 display: block;
 
             }
-            paper-toolbar.ing {
+
+            iron-icon {
+                --iron-icon-fill-color: #FF6200;
+                margin-right: 12px;
+                margin-bottom: 3px;
+            }
+
+            paper-toolbar.ingtoolbar {
                 --paper-toolbar-background: #FF6200;
             }
 
+            .unviewed {
+                font-style:italic;
+                font-weight: bold;
+            }
+            .viewed {
+                font-style:normal;
+                font-weight:normal;
+            }
+
+            .ing {
+                display: inline-flex;
+            }
+
+            .ingamount {
+                display: inline-flex;
+                position: absolute;
+                right: 10px;
+                top:10px;
+
+            }
+
+            paper-item {
+                margin: 10px;
+                padding: 5px;
+            }
+
+            .seperateline {
+                display: inline-flex;
+                margin: 3px;
+
+            }
 
         </style>
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
-        <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}" persisted-data="{{persistedData}}"></app-indexeddb-mirror>
-
-        <paper-toolbar class="ing" >
+        <firebase-document id="mydoc" app-name="offscrumday"></firebase-document>
+        <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}"
+                              persisted-data="{{persistedData}}"></app-indexeddb-mirror>
+        <paper-toolbar class="ingtoolbar">
             <div class="title">ING</div>
+            <paper-fab icon="add" on-tap="_addTransaction">Mimic transaction</paper-fab>
         </paper-toolbar>
-
-        <h2>Hello [[prop1]]</h2>
 
         <off-scrum-day-balance transactions="[[persistedData]]"></off-scrum-day-balance>
 
-            <ul class="notes">
-            <template is="dom-repeat" items="[[persistedData]]" as="transaction">
-                <li>{{transaction.description}} {{transaction.amount}}</li>
-            </template>
-        </ul>
+        <template is="dom-repeat" items="[[persistedData]]" as="transaction">
 
-        <button on-tap="mimicTransaction">Mimic transaction</button>
+                    <paper-item>
+
+                        <paper-checkbox id="checkbox" checked="{{_isViewed(transaction.viewed)}}"></paper-checkbox>
+                        <paper-icon-item>
+                            <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
+                        </paper-icon-item>
+                        <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
+                           {{transaction.type}}{{transaction.date}}{{transaction.name}}
+                            <span class="ingamount">{{transaction.amount}}</span>
+                            <div secondary>{{transaction.description}}</div>
+                        </paper-item-body>
+                    </paper-item>
+
+            </template>
 
     </template>
 
@@ -45,13 +99,21 @@
                 prop1: {
                     type: String,
                     value: 'off-scrum-day-app'
+                },
+                persistedData: {
+                    type: Array,
+                    observer: '_dataChanged'
                 }
             },
 
-            mimicTransaction: function() {
-                var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
-                this.unshift('persistedData', {
-                    $key: key,
+            _addTransaction: function () {
+                // https://github.com/firebase/polymerfire/issues/15
+                // http://stackoverflow.com/questions/37711115/polymerfire-creating-data-after-an-event
+                // set path to null somewhere to avoid overwriting data, I recommend doing it here since save's path update is lazy
+                this.$.mydoc.path = null;
+
+                // set data to the value to set/push
+                this.$.mydoc.data = {
                     related_account: '3022977',
                     type: 'GT',
                     name: 'Fugazi',
@@ -59,7 +121,41 @@
                     amount: -25,
                     date: new Date(),
                     iconId: 1
-                });
+
+                };
+
+                // call save, if the second parameter is falsey it'll call push to the first parameter if it's truthy it'll set the data to firstparam/secondparam
+                this.$.mydoc.save('/offscrumday');
+            },
+
+            _dataChanged: function (newData, oldData) {
+                if (typeof oldData !== "undefined" && newData !== oldData) {
+                    console.log("data changed");
+                    console.log(this.persistedData);
+                }
+            },
+
+            conditionalClassViewed: function (viewed) {
+                if ((viewed === 'true')) {
+                    return 'viewed';
+                } else {
+                    return 'unviewed';
+                }
+            },
+
+            _isViewed: function (viewed) {
+                return viewed === 'true';
+            },
+
+            _getIconId: function (transaction) {
+                switch (transaction.iconId) {
+                    case '1': return 'pin';
+                    case '2': return "cheque";
+                    case '3': return "giro";
+                    case '4': return "atm";
+                    case '5': return "transfer";
+                    default: return '';
+                }
             }
 
         });

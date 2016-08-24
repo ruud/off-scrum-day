@@ -3,7 +3,13 @@
   "main": "index.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "polymerfire": "firebase/polymerfire#^0.9.5"
+    "polymerfire": "firebase/polymerfire#^0.9.5",
+    "paper-item": "PolymerElements/paper-item#^1.2.1",
+    "paper-fab": "PolymerElements/paper-fab#^1.2.0",
+    "iron-icon": "PolymerElements/iron-icon",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg",
+    "iron-icons": "PolymerElements/iron-icons",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^1.4.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
