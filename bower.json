@@ -8,7 +8,8 @@
     "paper-fab": "PolymerElements/paper-fab#^1.2.0",
     "iron-icon": "PolymerElements/iron-icon",
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg",
-    "iron-icons": "PolymerElements/iron-icons"
+    "iron-icons": "PolymerElements/iron-icons",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^1.4.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

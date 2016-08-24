@@ -6,6 +6,7 @@
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../tgc-ing-transaction-icons.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
 
 <dom-module id="off-scrum-day-app">
     <template>
@@ -26,12 +27,12 @@
             }
 
             .unviewed {
-                font-style: italic;
+                font-style:italic;
                 font-weight: bold;
             }
             .viewed {
-                font-style: normal;
-                font-weight: normal;
+                font-style:normal;
+                font-weight:normal;
             }
 
             .ing {
@@ -70,6 +71,8 @@
             <template is="dom-repeat" items="[[persistedData]]" as="transaction">
 
                     <paper-item>
+
+                        <paper-checkbox id="checkbox" checked="{{_isViewed(transaction.viewed)}}"></paper-checkbox>
                         <paper-icon-item>
                             <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
                         </paper-icon-item>
@@ -116,12 +119,15 @@
             },
 
             conditionalClassViewed: function (viewed) {
-                console.log(viewed);
                 if ((viewed === 'true')) {
                     return 'viewed';
                 } else {
                     return 'unviewed';
                 }
+            },
+
+            _isViewed: function (viewed) {
+                return viewed === 'true';
             },
 
             _getIconId: function (transaction) {
