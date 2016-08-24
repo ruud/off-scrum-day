@@ -54,6 +54,15 @@
                 padding: 5px;
             }
 
+            paper-item-body,
+            paper-item-body > [secondary] {
+              margin-right: 96px;
+              overflow-x: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+            }
+
             .seperateline {
                 display: inline-flex;
                 margin: 3px;
@@ -81,8 +90,8 @@
                             <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
                         </paper-icon-item>
                         <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
-                           {{transaction.type}}{{transaction.date}}{{transaction.name}}
-                            <span class="ingamount">{{transaction.amount}}</span>
+                           {{transaction.type}} {{transaction.date}} {{transaction.name}}
+                            <span class="ingamount">{{numberFormat(transaction.amount)}}</span>
                             <div secondary>{{transaction.description}}</div>
                         </paper-item-body>
                     </paper-item>
@@ -129,6 +138,14 @@
 
             _getRandomInt: function(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            numberFormat: function(number) {
+              var numberFormat = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+              if (number < 0) {
+                return '- ' + numberFormat.format(Number(number / -1));
+              }
+              return numberFormat.format(number);
             },
 
             _dataChanged: function (newData, oldData) {
