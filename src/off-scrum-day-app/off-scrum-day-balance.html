@@ -10,7 +10,7 @@
 
         </style>
 
-        <h2>BALANCE: &euro;[[getBalance(transactions, transactions.length)]] op basis van [[transactions.length]] transacties</h2>
+        <h2>Saldo: <template is="dom-if" if="[[transactions.length]]">[[getFormattedBalance(transactions, transactions.length)]]</template> op basis van [[transactions.length]] transacties</h2>
 
     </template>
 
@@ -35,9 +35,22 @@
                         return previousValue + Number(transaction.amount);
                     }, 0);
 
+                } else {
+                    return 0;
                 }
+            },
+            getFormattedBalance: function (transactions) {
+                var numberFormat = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }),
+                    balance = this.getBalance(transactions);
+
+                if (balance < 0) {
+                    return '- ' + numberFormat.format(Number(balance / -1));
+                }
+                return numberFormat.format(balance);
 
             }
+
+
         });
     </script>
 </dom-module>
