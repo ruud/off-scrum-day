@@ -23,7 +23,6 @@
                 font-style: italic;
                 font-weight: bold;
             }
-
             .viewed {
                 font-style: normal;
                 font-weight: normal;
@@ -124,15 +123,12 @@
             _getIconId: function (transaction) {
                 console.log('TEST', transaction);
                 switch (transaction.iconId) {
-                    case '1':
-                        return 'pin';
-                    case '2':
-                        return "cheque";
-                    case '3':
-                        return "giro";
-
-                    default:
-                        return "";
+                    case '1': return 'pin';
+                    case '2': return "cheque";
+                    case '3': return "giro";
+                    case '4': return "atm";
+                    case '5': return "transfer";
+                    default: return '';
                 }
             }
         });
