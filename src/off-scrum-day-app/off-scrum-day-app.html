@@ -54,6 +54,15 @@
                 padding: 5px;
             }
 
+            paper-item-body,
+            paper-item-body > [secondary] {
+              margin-right: 96px;
+              overflow-x: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+            }
+
             .seperateline {
                 display: inline-flex;
                 margin: 3px;
@@ -61,7 +70,7 @@
             }
 
         </style>
-        <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
+        <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}" order-by-child="date"></firebase-query>
         <firebase-document id="mydoc" app-name="offscrumday"></firebase-document>
         <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}"
                               persisted-data="{{persistedData}}"></app-indexeddb-mirror>
@@ -82,7 +91,7 @@
                         </paper-icon-item>
                         <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
                            {{transaction.type}} {{transaction.date}} {{transaction.name}}
-                            <span class="ingamount">{{transaction.amount}}</span>
+                            <span class="ingamount">{{numberFormat(transaction.amount)}}</span>
                             <div secondary>{{transaction.description}}</div>
                         </paper-item-body>
                     </paper-item>
@@ -144,7 +153,7 @@
                         'Pasvolgnr:008 21-08-2016 14:35'
                     ]),
                     amount: String(Math.floor(Math.random() * 20001) - 10000),
-                    date: new Date(),
+                    date: new Date().toString(),
                     iconId: String(this._getRandomInt(1,5))
                 };
 
@@ -154,6 +163,14 @@
 
             _getRandomInt: function(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            numberFormat: function(number) {
+              var numberFormat = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+              if (number < 0) {
+                return '- ' + numberFormat.format(Number(number / -1));
+              }
+              return numberFormat.format(number);
             },
 
             _getRandomStringFromArray: function(textArray) {
