@@ -11,35 +11,70 @@
                 display: block;
 
             }
-            paper-toolbar.ing {
+
+            paper-toolbar.ingtoolbar {
                 --paper-toolbar-background: #FF6200;
             }
-            .ing {
+
+            .ingtrans {
                 display: inline-flex;
+                font-family: 'Roboto', 'Noto', sans-serif;
             }
+
+            .ingamount {
+                display: inline-flex;
+                float: right;
+
+            }
+
+            paper-item {
+                margin: 10px;
+                padding: 5px;
+            }
+            .seperateline {
+                display: inline-flex;
+                margin: 3px;
+
+            }
+
         </style>
 
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
-        <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}" persisted-data="{{persistedData}}"></app-indexeddb-mirror>
+        <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}"
+                              persisted-data="{{persistedData}}"></app-indexeddb-mirror>
 
-        <paper-toolbar class="ing" >
+        <paper-toolbar class="ingtoolbar">
             <div class="title">ING</div>
         </paper-toolbar>
 
-        <h2>Hello [[prop1]]</h2>
-        <ul class="notes">
-            <template is="dom-repeat" items="[[persistedData]]" as="transaction">
+        <!--<template is="dom-repeat" items="[[persistedData]]" as="transaction">-->
+        <!--<div class="itembox">-->
+        <!--<paper-item>-->
+        <!--<paper-item-body two-line>-->
+        <!--<p>{{transaction.type}}<p>-->
+        <!--<p>{{transaction.date}}<p>-->
+        <!--<div class="ingtrans">{{transaction.name}}</div>-->
+        <!--<div class="ingamount">{{transaction.amount}}</div>-->
+        <!--<div secondary>{{transaction.description}}</div>-->
+        <!--</paper-item-body>-->
+        <!--</paper-item>-->
+        <!--</div>-->
+        <!--</template>-->
+
+
+        <template is="dom-repeat" items="[[persistedData]]" as="transaction">
+            <div class="itembox">
                 <paper-item>
+                    <span class="seperateline"> {{transaction.iconId}} test</span>
                     <paper-item-body two-line>
-                        <div class="ing">{{transaction.type}}</div>
-                        <div class="ing">{{transaction.date}}</div>
-                        <div class="ing">{{transaction.name}}</div>
-                        <div class="ing">{{transaction.amount}}</div>
+                        {{transaction.date}} {{transaction.name}}
+                        <span class="ingamount">{{transaction.amount}}</span>
                         <div secondary>{{transaction.description}}</div>
                     </paper-item-body>
                 </paper-item>
-            </template>
-        </ul>
+            </div>
+        </template>
+
 
         <button on-tap="mimicTransaction">Mimic transaction</button>
 
@@ -56,12 +91,12 @@
                     value: 'off-scrum-day-app'
                 }
             },
-            mimicTransaction: function() {
-              var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
-              this.unshift('persistedData', {
-                $key: key,
-                title: 'Fugazi'
-              });
+            mimicTransaction: function () {
+                var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
+                this.unshift('persistedData', {
+                    $key: key,
+                    title: 'Fugazi'
+                });
             }
         });
     </script>
