@@ -15,6 +15,12 @@
 
             }
 
+            iron-icon {
+                --iron-icon-fill-color: #FF6200;
+                margin-right: 12px;
+                margin-bottom: 3px;
+            }
+
             paper-toolbar.ingtoolbar {
                 --paper-toolbar-background: #FF6200;
             }
@@ -34,7 +40,9 @@
 
             .ingamount {
                 display: inline-flex;
-                float: right;
+                position: absolute;
+                right: 10px;
+                top:10px;
 
             }
 
@@ -57,24 +65,22 @@
         <paper-toolbar class="ingtoolbar">
             <div class="title">ING</div>
         </paper-toolbar>
-        <ul class="notes">
+
             <template is="dom-repeat" items="[[persistedData]]" as="transaction">
-                <div class="itembox">
+
                     <paper-item>
+                        <paper-icon-item>
+                            <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
+                        </paper-icon-item>
                         <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
-                            <paper-icon-item>
-                                <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
-                            </paper-icon-item>
-                            <div class="ing">{{transaction.type}}</div>
-                            <div class="ing">{{transaction.date}}</div>
-                            <div class="ing">{{transaction.name}}</div>
-                            <div class="ing">{{transaction.amount}}</div>
+                           {{transaction.type}}{{transaction.date}}{{transaction.name}}
+                            <span class="ingamount">{{transaction.amount}}</span>
                             <div secondary>{{transaction.description}}</div>
                         </paper-item-body>
                     </paper-item>
-                </div>
+
             </template>
-        </ul>
+
 
         <paper-fab icon="add" on-tap="mimicTransaction">Mimic transaction</paper-fab>
 
