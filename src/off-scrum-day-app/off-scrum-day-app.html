@@ -1,17 +1,27 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <dom-module id="off-scrum-day-app">
     <template>
         <style>
             :host {
                 display: block;
+
             }
+            paper-toolbar.ing {
+                --paper-toolbar-background: #FF6200;
+            }
+
 
         </style>
 
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
         <app-indexeddb-mirror session="user1" key="offscrumday" data="{{data}}" persisted-data="{{persistedData}}"></app-indexeddb-mirror>
+
+        <paper-toolbar class="ing" >
+            <div class="title">ING</div>
+        </paper-toolbar>
 
         <h2>Hello [[prop1]]</h2>
         <ul class="notes">
