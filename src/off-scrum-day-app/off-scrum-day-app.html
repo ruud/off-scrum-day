@@ -81,7 +81,7 @@
                             <iron-icon icon="ing-transaction:[[_getIconId(transaction)]]"></iron-icon>
                         </paper-icon-item>
                         <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
-                           {{transaction.type}}{{transaction.date}}{{transaction.name}}
+                           {{transaction.type}} {{transaction.date}} {{transaction.name}}
                             <span class="ingamount">{{transaction.amount}}</span>
                             <div secondary>{{transaction.description}}</div>
                         </paper-item-body>
