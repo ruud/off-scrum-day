@@ -7,7 +7,7 @@
         "amount": "-25",
         "date": "24-08-2016",
         "iconId": "1",
-        "viewed": "0"
+        "viewed": "1"
     }, {
         "related_account": "3022977",
         "type": "GT",
@@ -16,7 +16,7 @@
         "amount": "-185",
         "date": "23-08-2016",
         "iconId": "2",
-        "viewed": "0"
+        "viewed": "1"
     }, {
         "related_account": "3022977",
         "type": "VZ",
@@ -43,7 +43,7 @@
         "amount": "34",
         "date": "22-08-2016",
         "iconId": "5",
-        "viewed": "0"
+        "viewed": "1"
     }, {
         "related_account": "3022977",
         "type": "BA",
