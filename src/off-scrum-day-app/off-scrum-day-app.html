@@ -20,6 +20,8 @@
             </template>
         </ul>
 
+        <button on-tap="mimicTransaction">Mimic transaction</button>
+
     </template>
 
     <script>
@@ -32,6 +34,13 @@
                     type: String,
                     value: 'off-scrum-day-app'
                 }
+            },
+            mimicTransaction: function() {
+              var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
+              this.unshift('persistedData', {
+                $key: key,
+                title: 'Fugazi'
+              });
             }
         });
     </script>

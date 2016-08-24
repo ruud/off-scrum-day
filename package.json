@@ -1,0 +1,27 @@
+{
+  "name": "off-scrum-day",
+  "version": "0.0.1",
+  "description": "Off Scrum Day",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "polymer serve",
+    "test": "polymer test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruud/off-scrum-day.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ruud/off-scrum-day/issues"
+  },
+  "homepage": "https://github.com/ruud/off-scrum-day#readme",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "polymer-cli": "^0.15.0",
+    "web-component-tester": "^4.3.1",
+    "web-component-tester-istanbul": "^0.10.0"
+  }
+}
