@@ -106,6 +106,7 @@
             },
 
             _addTransaction: function () {
+                // https://github.com/firebase/polymerfire/issues/15
                 // http://stackoverflow.com/questions/37711115/polymerfire-creating-data-after-an-event
                 // set path to null somewhere to avoid overwriting data, I recommend doing it here since save's path update is lazy
                 this.$.mydoc.path = null;
