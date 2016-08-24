@@ -14,9 +14,21 @@
             paper-toolbar.ing {
                 --paper-toolbar-background: #FF6200;
             }
+
+            .unviewed {
+                font-style:italic;
+                font-weight: bold;
+            }
+            .viewed {
+                font-style:normal;
+                font-weight:normal;
+            }
+
             .ing {
                 display: inline-flex;
             }
+
+
         </style>
 
         <firebase-query id="query" app-name="offscrumday" path="/offscrumday" data="{{data}}"></firebase-query>
@@ -30,7 +42,7 @@
         <ul class="notes">
             <template is="dom-repeat" items="[[persistedData]]" as="transaction">
                 <paper-item>
-                    <paper-item-body two-line>
+                    <paper-item-body two-line class$=" {{conditionalClassViewed(transaction.viewed)}}">
                         <div class="ing">{{transaction.type}}</div>
                         <div class="ing">{{transaction.date}}</div>
                         <div class="ing">{{transaction.name}}</div>
@@ -54,14 +66,35 @@
                 prop1: {
                     type: String,
                     value: 'off-scrum-day-app'
+                },
+                persistedData: {
+                    type: Object,
+                    observer: "dataChanged"
                 }
             },
+
             mimicTransaction: function() {
               var key = Number(this.persistedData.slice(-1)[0].$key) + 1;
               this.unshift('persistedData', {
                 $key: key,
                 title: 'Fugazi'
               });
+            },
+
+            dataChanged: function(newData, oldData) {
+                if (typeof oldData !== "undefined" && newData !== oldData) {
+                    console.log("data changed");
+                    console.log(this.persistedData);
+                }
+            },
+
+            conditionalClassViewed: function(viewed){
+                console.log(viewed);
+                if ((viewed === 'true')) {
+                    return 'viewed';
+                }else{
+                    return 'unviewed';
+                }
             }
         });
     </script>
